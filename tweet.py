@@ -1,7 +1,9 @@
 import tweepy
 from flask import Flask, render_template, request
+import os
 
 app = Flask("Twitter")
+port = int(os.environ.get("PORT", 5000))
 
 with open("credentials.txt", "r") as file:
     consumer_key = file.readline().split()[2]
@@ -29,4 +31,4 @@ def tweet():
     return render_template("main.html", response=response)
 
 
-app.run(debug=True)
+app.run(host='0.0.0.0', port=port, debug=True)
